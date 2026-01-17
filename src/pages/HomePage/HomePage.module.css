@@ -1,0 +1,19 @@
+.link {
+  display: block;
+  position: relative;
+  width: 25%;
+  padding: 0.5rem 1em;
+  border-radius: 5px;
+  color: #555;
+  text-decoration: none;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s,
+    color 0.2s;
+}
+
+.link:hover {
+  background-color: rgba(103, 58, 184, 0.15);
+  color: black;
+  box-shadow: inset 0 0 0 1px rgba(103, 58, 184, 0.25);
+}
