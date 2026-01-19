@@ -1,15 +1,17 @@
+import { Todo } from "../pages/TodoPage/Todo";
+
 export interface ITodoService {
-  fetchTodos: () => Promise<void>;
+  fetchTodos: () => Promise<Todo[]>;
 }
 
 export class TodoService implements ITodoService {
-  async fetchTodos(): Promise<void> {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
+  async fetchTodos(): Promise<Todo[]> {
     const response = await fetch("https://jsonplaceholder.typicode.com/todos");
 
-    console.log(response);
+    if (!response.ok) {
+      throw new Error("Failed to fetch todos");
+    }
 
-    return;
+    return response.json();
   }
 }

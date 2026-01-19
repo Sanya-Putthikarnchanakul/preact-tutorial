@@ -1,18 +1,9 @@
-import { computed, signal, useComputed, useSignal } from "@preact/signals";
+import { useComputed, useSignal } from "@preact/signals";
 import { Todo } from "./Todo";
 import { useEffect } from "preact/hooks";
-import { TodoService } from "../../services/TodoService";
+import { ITodoService, TodoService } from "../../services/TodoService";
 
-// const todos = signal<Todo[]>([
-//   { id: 1, title: "Learn Preact", completed: true },
-//   { id: 2, title: "Build a Todo App", completed: false },
-// ]);
-
-// const completedCount = computed(() => {
-//   return todos.value.filter((todo) => todo.completed).length;
-// });
-
-export const useTodoPage = () => {
+export const useTodoPage = (todosService: ITodoService = new TodoService()) => {
   const todos = useSignal<Todo[]>([
     { id: 1, title: "Learn Preact", completed: true },
     { id: 2, title: "Build a Todo App", completed: false },
@@ -23,7 +14,14 @@ export const useTodoPage = () => {
   });
 
   useEffect(() => {
-    
+    (async () => {
+      try {
+        const fetchedTodos = await todosService.fetchTodos();
+        todos.value = fetchedTodos;
+      } catch (error) {
+        console.error("Failed to fetch todos:", error);
+      }
+    })();
   }, []);
 
   const addTodo = (title: string) => {
