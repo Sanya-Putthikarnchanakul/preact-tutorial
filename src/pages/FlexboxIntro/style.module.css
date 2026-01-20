@@ -1,0 +1,21 @@
+.box1 {
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: lightblue;
+}
+
+.row1 {
+    padding: 16px;
+    background-color: coral;
+}
+
+.row2 {
+    padding: 16px;
+    background-color: lightgreen;
+}
+
+.row3 {
+    padding: 16px;
+    background-color: lightskyblue;
+    flex-grow: 1;
+}
